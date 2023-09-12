@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+#define MAX_SIZE 50011
+using namespace std;
+
+/*
+
+
+https://codeforces.com/contest/716/problem/B
+
+yes case:
+ABC??FGHIJK???OPQR?TUVWXY?
+??????????????????????????
+
+no case:
+WELCOMETOCODEFORCESROUNDTHREEHUNDREDANDSEVENTYTWO
+AABCDEFGHIJKLMNOPQRSTUVW??M
+
+*/
+
+
+int main() {
+    
+    return 0;
+}

@@ -1,25 +1,19 @@
-A. This problem is NOT minimum spanning tree but a greedy problem. You can figure this out from the second example. 
+A. We can view this problem as a shortest path problem. The only restriction is when you detect the shortest distance to a vertex is greater than 
+the water level, you cannot enter that vertex (i.e., don't push that vertex to the queue).
 
-B. Since all paths intersect with each other, there must contain 1 vertex that belongs to all paths. You can show if you choose 
-this vertex to be the vertex with the maximum degree, it is always optimal. 
+B. This problem uses the property we covered in the tutorial. An edge is useful if and only if dist(1, u) + weight(u, v) = dist(1, v).
+Add the useful edges of the graph (all the other edges can be removed). For the remaining edges, remove the edges greedily.
 
-C. If the graph has a bridge, no solution. Otherwise, you only have 1 bi-connected component. For this case, note that in 
-an undirected graph, it only contains tree edges and back edges when you do dfs. Back edges are the ones that create cycle,
-tree edges are the ones that "direct" the dfs. First think about how to direct that graph if it only contains 1 cycle.
-Then, think how to generalize your solution to all cases.
+C. This problem is a combination of today's Floyd question + PS2 E. Hint: You can work the queries in a backward direction.
 
-D. Noticed that for a directed graph, the backedge in dfs are the edges that create cycles. If the graph has no backedge,
-it has no cycles. Also, backedges themselves won't form any cycle. If the original graph has no cycle, K = 1.
-Then, think about what are the other possible value(s) of K, and how to construct the answer in these cases.
+D. If you ignore the unassigned edges, and the shortest path is already less than L, there's definitely no solution.
+If the shortest path is equal to L, you can assign all the unassigned edges as +inf.
+Otherwise, you know the shortest path is greater than L. This means, the shortest path must go through the unassigned edges.
+The key observation is you only need to assign 1 unassigned edge as some W and all the remaining unassigned edges as +inf.
 
+E. We are solving shortest path problems this week. How is this problem related to shortest path? Hint: system of different constraints.
 
-
-E. This is a classic problem. We've discussed its "solution" in the tutorial. How to find the maximum edge on the cycle can be 
-done with LCA.
-
-
-F. You can solve this problem in 2 stages. First, compress all the equal cells into a large component. Then, deal with the 
-problem that only has < or >. You can think this problem as a set of inequalities of form a < b. You can use a graph to represent 
-this inequality. Basically, connect a -> b with an edge of length 1. Now, each vertex, you want to know what is the longest path 
-that arrives in this vertex. Since the graph is a DAG (you can prove it), you don't need to run bellman-ford, you can simply 
-use a dp to solve the problem.
+F. Using the key property we discussed in the tutorial you can derive an O(N^4) solution easily. This is too slow.
+Now, to calculate how many edges are on some shortest path between i and j, if you know how many of these edges (a, b) starts from a 
+for each a = 1..N, (i.e, cnt[a] means how many edges a -> v that is on the shortest path between a and b for some v = 1..N), the answer 
+to (i, j) is simply sum(cnt[a], a = 1..N). Think how you would maintain the cnt array.

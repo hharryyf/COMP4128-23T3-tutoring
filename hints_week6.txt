@@ -1,0 +1,49 @@
+A. This problem can be solved with range tree and range update.
+Each node maintain the following information: lazy tag, number of numbers % 3 == 0 (c[0]), number of numbers %3 == 1 (c[1]), number of numbers %3 == 2 (c[2]).
+Initially all the lazy tags are set to 0.
+When you add 1 to a range. Just add 1 to the lazy tag. After that check what lazy tag % 3.
+If the value is 0, do nothing.
+If the value is 1, set c[0] to c[2], c[1] to c[0], c[2] to c[1].
+If the value is 2, similar to the previous case.
+Don't forget to pushdown the lazy tag when you traverse down the tree.
+
+B. Range tree has a functionality: maintaining divide and conquer information. You don't need range update for this problem. Just point update 
+and range query. For the total solving time requirement, you just need to maintain the sum of difficulty of a range which is simple.
+For the increasing/decreasing property. You can think about the following question: given 2 ranges [l1, r1], [l2, r2]. Suppose [l1, r1] is 
+sorted in non-decreasing order, and [l2,r2] is sorted in non-decreasing order. How would you check if [l1,r1] @ [l2,r2] is sorted in non-decreasing order?
+Here @ means appending [l2,r2] to [l1,r1]. The answer is very simple, just if a[r1] <= a[l2]. This observation is enough to solve the whole problem.
+
+C. Since the range is very large, you cannot build a range tree on the complete range.
+Observe that only 1, l, r, r + 1 are useful to the answer. You can compress the range to that contains only these "useful" values.
+Now the problem is as follows: you need to design a data structure that supports the following operations:
+1) set a range to 1
+2) set a range to 0
+3) for each element v in a range change it to v = v ^ 1 (here ^ is the xor operator)
+4) query what is the leftmost 0 in the entire range.
+If you don't have type 3) query, the problem can be solved easily with a range tree with lazy tags. In this case, for every type 4)
+query, you just need to descend on the range tree, and find the leftmost 0 in the tree.
+If you have type 3) query, things are a bit complicated. Because set a range to 1 followed by "switch 0 to 1 and 1 to 0" is different from 
+"switch 0 to 1 and 1 to 0" followed by set a range to 1. You should then realize the priority of type 1) & 2) operations is higher than 
+the priority of type 4) operation. Hence, a solution to this is you have 2 lazy tags per node in the range tree. However, you need to 
+make sure that each node in the tree can have at most 1 lazy tag at any moment that is "activated". Think how you would maintain these 2 tags. 
+
+D. If k = 0 for all update operations, the problem is simple. We've done this kind of problem in the tutorial.  
+If k != 0, the problem is a bit tricky. Since it's problem D, I'll leave it to you. However, I'll give the final hint: try to make use of 
+the depth of a node in the tree, and see how you can rewrite x - k * depth to something maintainable. 
+
+E. In my opinion, this problem is simpler than D.  This problem is related to "Given an array, add v to index i, 
+or query how many numbers are less than v in a range [l, r]" that we've discussed in the tutorial.
+They are not the same, but they all use range tree + set. 
+
+F. I remembered quite clearly that 4 years ago, I solved this problem entirely by myself using 3 days of thinking time. I was so happy lol.
+It's a fantastic problem. The problem can be reduced to the following:
+1) connect a vertex to a range of vertices (directed edge)
+2) After all the connections are established, which vertex can reach the most amount of vertices?
+Note that several weeks ago, we discussed a union by range problem in the tutorial, that one was undirected graph, here we are dealing with a 
+directed graph. However, the technique is very similar. You can construct a graph with the help of a range tree structure.
+You can review the second problem in the tutorial https://github.com/hharryyf/COMP4128-23T3-tutoring/blob/main/week03/slides.pdf 
+For the second part of this question, you need to use tarjan's algorithm to compress all the SCC, and the resulting graph is a DAG.
+Then, the problem is reduced to what is the longest weighted path in a DAG which can be done with dp.
+
+
+

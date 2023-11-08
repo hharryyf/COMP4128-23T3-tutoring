@@ -1,0 +1,21 @@
+A. Be careful about the input format. You reads in n followed by m. But when you read in the grid, there are m lines,
+each line contains n characters! The problem is equivalent to the famous 'escape problem'. You need to find the minimum 
+cost to disconnect the cell 'B' from the 4 sides of the grid while cutting each vertex has a certain cost. Hint: treat 
+the cells on the 4 sides as sinks, might need to treat each vertex as 'in' and 'out', then run min-cut.
+
+B. If there's no magic potion, the problem is just maximum bipartite matching. This indicates the problem is related to maxflow.
+Now, how to deal with the magic potion? Hint: treat it as another super source. 
+
+
+C. For problems on the grid, the following approach is always a good first attempt. You bicolor the grid like the chess board.
+Then, the problem can be reduced to finding the maximum bipartite matching.
+
+D. You need to convert this problem to "each edge can allow k bears to pass, determine if all bears can travel from 1 end 
+of the graph to the other end". We tackled this kind of problems many times before (i.e., convert a maximization problem to a validation problem),
+I'll leave it to you to finish the problem solving procedure.
+
+E. This problems is long, but are understanding the problem statement, you should realize it is very similar to the first tutorial 
+problem. Hint: instead of 1-layer flow network, construct a multi-layer flow network to model evacuation routes.
+
+F. The problem is equivalent to finding if the min-cut for a graph is unique. A very interesting property about min-cut is 
+the union/intersection of min-cut is also a min-cut. Think how you can prove it!

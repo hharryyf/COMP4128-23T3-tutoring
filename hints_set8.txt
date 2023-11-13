@@ -1,0 +1,26 @@
+A. The idea is to consider the contribution of each number to the answer. The SETDIFF can be rewritten as 
+sum(a[i] * (number of sets a[i] is the maximum element - number of set a[i] is the minimum element), i = 1..N).
+
+
+B. The key observation is you can first apply a single type-1 operation, then apply multiple type-2 operation to finish 
+the question. Now what is the minimum number you can achieve? The hint is to consider the prime factorization of
+the original number. 
+
+C. If N is small, this is a very simple problem. In particular, if M = 2, this problem is just 
+the fibonacci sequence. For M <= 100, there is not much of a difference. You can easily write a first order 
+recursive formula. How to handle large N? Hints: fast matrix exponential. 
+
+D. This problem is a bit nasty. You many need to use the linear memory sieve (not covered in the lecture) to get accepted. 
+https://cp-algorithms.com/algebra/prime-sieve-linear.html
+Once you know how to use the above template, you can use it to do prime factorization of all numbers between 1 and 1e7.
+For a number, if it is of form p^k (i.e., only 1 prime factor), the answer is definitely -1.
+Otherwise, the answer is not -1. For numbers not of form p^k, the number must of form p1^k1 * p2^k2 * ... * pm^km (m > 1).
+My claim is, you can always use the answer for the number p1 * p2 * ... * pm as the answer for p1^k1 * p2^k2 * ... * pm^km.
+
+E. Firstly observe that you only care about the relative size of the elements, so you can compress the elements between 1 and N.
+Next, you should realize the winning sequence must be something like p[1] < p[2] < p[3] < ... < p[k] = p[k+1].
+The final hint is you can capture the current state of the game with the number of rounds and the last element you picked.
+
+F. This problem is pretty complicated, but it is similar to problem set 3F. Instead of filling the grid from left to right, top to down,
+you fill it row by row. Every row, you need to make sure there's at least 1 '1'. But how to fulfill the column requirement?
+You can also keep track of how many columns already contains a '1' after you fill the first i rows in the dp state.

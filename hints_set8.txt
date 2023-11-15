@@ -10,7 +10,7 @@ C. If N is small, this is a very simple problem. In particular, if M = 2, this p
 the fibonacci sequence. For M <= 100, there is not much of a difference. You can easily write a first order 
 recursive formula. How to handle large N? Hints: fast matrix exponential. 
 
-D. This problem is a bit nasty. You many need to use the linear memory sieve (not covered in the lecture) to get accepted. 
+D. This problem is a bit nasty. You may need to use the linear memory sieve (not covered in the lecture) to get accepted. 
 https://cp-algorithms.com/algebra/prime-sieve-linear.html
 Once you know how to use the above template, you can use it to do prime factorization of all numbers between 1 and 1e7.
 For a number, if it is of form p^k (i.e., only 1 prime factor), the answer is definitely -1.
